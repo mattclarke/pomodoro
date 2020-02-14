@@ -12,7 +12,7 @@ class PomodoroApp(object):
             "reset": "Reset Pomodoros",
             "break_message": "Time is up! Take a 5 minute break 👍",
             "completed_message": "Four Pomodoros completed! Take a 20 minute break 😇",
-            "interval": 10,
+            "interval": 1500,
         }
         self.completed = 0
         self.app = rumps.App(self.config["app_name"])
@@ -46,7 +46,7 @@ class PomodoroApp(object):
             else:
                 message = self.config["completed_message"]
             rumps.notification(
-                title=self.config["app_name"], subtitle=message, message=message
+                title=self.config["app_name"], subtitle=message, message=""
             )
             self.stop_timer(None)
         else:
