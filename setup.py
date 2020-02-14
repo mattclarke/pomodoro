@@ -8,6 +8,9 @@ OPTIONS = {
     'plist': {
         'CFBundleShortVersionString': '0.2.0',
         'LSUIElement': True,
+        'PyRuntimeLocations': [
+                '/Users/mattclarke/miniconda3/lib/libpython3.7m.dylib'
+               ]
     },
     'packages': ['rumps'],
 }
