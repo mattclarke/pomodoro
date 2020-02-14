@@ -30,7 +30,10 @@ class PomodoroApp(object):
     def set_up_menu(self):
         self.timer.stop()
         self.timer.count = 0
-        self.app.title = "🍅" if self.completed == 0 else "🍅" * self.completed
+        if self.completed == 0:
+            self.app.title = "🍅"
+        else:
+            self.app.title = f"🍅[{self.completed}]"
 
     def on_tick(self, sender):
         time_left = sender.end - sender.count
@@ -42,7 +45,6 @@ class PomodoroApp(object):
                 message = self.config["break_message"]
             else:
                 message = self.config["completed_message"]
-                self.completed = 0
             rumps.notification(
                 title=self.config["app_name"], subtitle=message, message=message
             )
@@ -54,6 +56,7 @@ class PomodoroApp(object):
     def start_timer(self, sender):
         assert sender.title.lower().startswith("start")
         self.timer.count = 0
+        self.completed = 0 if self.completed == 4 else self.completed
         self.timer.end = self.interval
         sender.title = self.config["stop"]
         self.timer.start()
